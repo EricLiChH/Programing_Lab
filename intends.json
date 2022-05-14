@@ -1,0 +1,7 @@
+{
+  "intends":  [{
+  "tags": "greeting",
+  "patterns": ["hi","hello"],
+    "response": ["Hi! I'm your personal chatting_bot"]
+}]
+}
