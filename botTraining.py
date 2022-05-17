@@ -5,6 +5,7 @@ import json
 # TODO: reduce the stem of every word
 import nltk
 import numpy
+import numpy as np
 from nltk.stem import WordNetLemmatizer
 
 import numpy as py
@@ -22,7 +23,7 @@ def function_start() -> None:
 
 
 def function_training() -> None:
-    lemmatizer = WordNetLemmatizer
+    lemmatizer = WordNetLemmatizer()
 
     intends = json.loads(open('intends.json').read())
 
@@ -31,17 +32,17 @@ def function_training() -> None:
     documents = []
     ignores = [',', '.', '!', '?', '，', '。']
 
-    for intend in intends['intends']:
-        for pattern in intend['patterns']:
-            wordList = nltk.word_tokenize(pattern)
-            words.append(wordList)
-            documents.append((wordList, intend['tags']))
-            if intend['tags'] not in learns:
-                learns.append(intend['tags'])
+    for intent in intends['intends']:
+        for pattern in intent['patterns']:
+            word = nltk.word_tokenize(pattern)
+            words.extend(word)
+            documents.append((word, intent['tag']))
+            if intent['tag'] not in learns:
+                learns.append(intent['tag'])
 
-    words = [lemmatizer.lemmatize(word) for word in words if word not in ignores]
-    words = sorted(set(words))
-
+    words = [lemmatizer.lemmatize(w.lower()) for w in words if w not in ignores]
+    words = sorted(list(set(words)))
+    print(words)
     learns = sorted(set(learns))
 
     pickle.dump(words, open('words.pkl ', 'wb'))
@@ -73,17 +74,17 @@ def function_training() -> None:
     training_x = list(training[:, 0])
     training_y = list(training[:, 1])
 
-    chatting_model = Sequential
+    chatting_model = Sequential()
     chatting_model.add(Dense(128, input_shape=(len(training_x[0]),), activation='relu'))
     chatting_model.add(Dropout(0.5))
     chatting_model.add(Dense(64, activation='relu'))
     chatting_model.add(Dropout(0.5))
     chatting_model.add(Dense(len(training_y[0]), activation='softmax'))
 
-    sgd = SGD(lr=0.01, decay=1e-6, mementum=0.9, nesterov=True)
+    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     chatting_model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-    chatting_model.fit(numpy.array(training_x), numpy.array(training_y), epochs=200, batch_size=5, verbose=1)
+    hist = chatting_model.fit(np.array(training_x), np.array(training_y), epochs=200, batch_size=5, verbose=1)
     chatting_model.save('chatting_model.model')
 
     print("TRAINING DONE")
