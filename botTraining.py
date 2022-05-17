@@ -42,11 +42,12 @@ def function_training() -> None:
 
     words = [lemmatizer.lemmatize(w.lower()) for w in words if w not in ignores]
     words = sorted(list(set(words)))
-    print(words)
+    # print(words)
     learns = sorted(set(learns))
 
     pickle.dump(words, open('words.pkl ', 'wb'))
-    pickle.dump(words, open('learns.pkl ', 'wb'))
+    pickle.dump(learns, open('learns.pkl ', 'wb'))
+    # change to learns
 
     training = []
     output_emp = [0] * len(learns)
@@ -85,7 +86,7 @@ def function_training() -> None:
     chatting_model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
     hist = chatting_model.fit(np.array(training_x), np.array(training_y), epochs=200, batch_size=5, verbose=1)
-    chatting_model.save('chatting_model.model')
+    chatting_model.save('chatting_model.h5',hist)
 
     print("TRAINING DONE")
 
