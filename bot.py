@@ -11,7 +11,7 @@ lemmatizer = WordNetLemmatizer()
 intends = json.loads(open('intends.json').read())
 
 words=pickle.load(open("words.pkl", "rb"))
-classes=pickle.load(open("learns.pkl", "rb"))
+learns=pickle.load(open("learns.pkl", "rb"))
 model=load_model('chatting_model.h5')
 
 
@@ -23,7 +23,7 @@ def opti_sentence(sentence):
 
 def store_words(sentence):
     sentence_words = opti_sentence(sentence)
-    container = [0]*len(sentence_words)
+    container = [0]*len(words)
     for word_s in sentence_words:
         for i, word in enumerate(words):
             if word_s == word:
@@ -36,3 +36,27 @@ def predict(sentence):
     bow=store_words(sentence)
     res=model.predict(np.array([bow]))[0]
     ERROR_THRESHOLD=0.25
+    results=[[i,r] for i, r in enumerate(res) if r>ERROR_THRESHOLD]
+
+    results.sort(key=lambda x:x[1],reverse=True)
+    return_list=[]
+    for r in results:
+        return_list.append({'intends':learns[r[0]], 'probability':str(r[1])})
+    return return_list
+
+def getresponse(intend_list,intend_json):
+    tag=intend_list[0]['intends']
+    list_intends=intend_json['intends']
+    for i in list_intends:
+        if i['tag']==tag:
+            result=random.choice(i['response'])
+            break
+    return result
+
+print('now using your bot!')
+while(True):
+    message=input("")
+    ints=predict(message)
+    res=getresponse(ints,intends)
+    print(res)
+
