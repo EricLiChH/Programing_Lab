@@ -83,7 +83,7 @@
     },
     {
       "tag": "idol",
-      "patterns": ["who is your idol","your idol"],
+      "patterns": ["who is your idol","your idol","youth icon"],
       "response": ["Ding zhen","Eileen Gu","Kobe","chen rui","sun xiaochuan","lexburner"]
     },
     {

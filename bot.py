@@ -17,7 +17,7 @@ model=load_model('chatting_model.h5')
 
 def opti_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
-    sentence_words = [lemmatizer.lemmatize(word) for word in words]
+    sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
     # divide sentence and lemmatize each word
     return sentence_words
 
@@ -53,10 +53,12 @@ def getresponse(intend_list,intend_json):
             break
     return result
 
-print('now using your bot!')
-while(True):
-    message=input("")
-    ints=predict(message)
-    res=getresponse(ints,intends)
-    print(res)
+def test_bot():
+    print('now using your bot!')
+    while True:
+        message=input("user:")
+        ints=predict(message)
+        res=getresponse(ints,intends)
+        print("bot:"+res)
 
+test_bot()

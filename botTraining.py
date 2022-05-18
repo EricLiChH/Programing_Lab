@@ -85,11 +85,22 @@ def function_training() -> None:
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     chatting_model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-    hist = chatting_model.fit(np.array(training_x), np.array(training_y), epochs=200, batch_size=5, verbose=1)
+    hist = chatting_model.fit(np.array(training_x), np.array(training_y), epochs=20000, batch_size=5, verbose=1)
     chatting_model.save('chatting_model.h5',hist)
 
+def function_down():
     print("TRAINING DONE")
 
 
-function_start()
-function_training()
+def main():
+    function_start()
+    i = 0
+    j = 0
+    # while(i < 1919810):
+    #     i += 1
+    #     while(j < 114514):
+    #         j += 1
+    function_training()
+    function_down()
+
+main()
