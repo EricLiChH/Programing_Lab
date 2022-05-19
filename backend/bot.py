@@ -1,6 +1,5 @@
 import random
 import json
-import socket
 import pickle
 import numpy as np
 import nltk
@@ -9,7 +8,7 @@ from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 
 lemmatizer = WordNetLemmatizer()
-intends = json.loads(open('intends.json').read())
+intends = json.loads(open('intends.json',encoding='utf-8').read())
 
 words=pickle.load(open("words.pkl", "rb"))
 learns=pickle.load(open("learns.pkl", "rb"))
@@ -55,18 +54,11 @@ def getresponse(intend_list,intend_json):
     return result
 
 def test_bot():
-    host = 'localhost'
-    port = 8001
-    sock = socket.socket()
-    sock.bind(("", port))
-    sock.listen(5)
+    print('now using your bot!')
     while True:
-        con, address = sock.accept()
-        data = con.recvfrom(1024)
-        message = str(data[0], 'utf-8')
-        ints = predict(message)
-        res = getresponse(ints,intends)
-        con.sendall(bytes(res, 'utf-8'))
-        con.close()
+        message=input("user:")
+        ints=predict(message)
+        res=getresponse(ints,intends)
+        print("bot:"+res)
 
 test_bot()
