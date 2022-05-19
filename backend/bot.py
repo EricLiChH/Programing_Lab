@@ -1,7 +1,7 @@
 import random
 import json
-import socket
 import pickle
+import socket
 import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -9,7 +9,7 @@ from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 
 lemmatizer = WordNetLemmatizer()
-intends = json.loads(open('intends.json').read())
+intends = json.loads(open('intends.json',encoding='utf-8').read())
 
 words=pickle.load(open("words.pkl", "rb"))
 learns=pickle.load(open("learns.pkl", "rb"))
