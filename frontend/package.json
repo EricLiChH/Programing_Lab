@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "koa": "^2.13.4",
+    "koa-route": "^3.2.0",
+    "koa-websocket": "^7.0.0"
+  }
+}
