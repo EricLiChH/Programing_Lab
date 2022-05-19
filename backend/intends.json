@@ -55,7 +55,7 @@
     {
       "tag": "Tieba",
       "patterns": ["which tieba you often browse","which tieba","what tieba","tieba"],
-      "response": ["Sun'Xiaochuan Ba","Pressure Resistance and Blame-bearing Ba","Sun Ba","V Ba","Hahah~， I have been a V87 for a long time.","Can can need 👀",
+      "response": ["Sun'Xiaochuan Ba","Pressure Resistance and Blame-bearing Ba","Sun Ba","V Ba","Hahah~, I have been a V87 for a long time.","Can can need 👀",
       "I am a baby maggot of Kang Ba","I am a little rat of Sun'Ba "]
     },
     {
