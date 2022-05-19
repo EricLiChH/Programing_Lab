@@ -1,6 +1,7 @@
 import random
 import json
 import pickle
+import socket
 import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -54,11 +55,18 @@ def getresponse(intend_list,intend_json):
     return result
 
 def test_bot():
-    print('now using your bot!')
+    host = 'localhost'
+    port = 8001
+    sock = socket.socket()
+    sock.bind(("", port))
+    sock.listen(5)
     while True:
-        message=input("user:")
-        ints=predict(message)
-        res=getresponse(ints,intends)
-        print("bot:"+res)
+        con, address = sock.accept()
+        data = con.recvfrom(1024)
+        message = str(data[0], 'utf-8')
+        ints = predict(message)
+        res = getresponse(ints,intends)
+        con.sendall(bytes(res, 'utf-8'))
+        con.close()
 
 test_bot()
