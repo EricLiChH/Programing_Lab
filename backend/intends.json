@@ -128,7 +128,36 @@
       "tag": "stocks",
       "patterns": ["do you have your stock account","have you buy any stock"],
       "response": ["I have bought stock ,but get a great loss","yes ,and I only waste money"]
+    },
+    {
+      "tag": "sports",
+      "patterns": ["what is your favourite sports","do you usually play sports"],
+      "response": ["I like table tennis best and play table tennis nearly everyday","well ,I love to play basketball"]
+    },
+    {
+      "tag": "table tennis",
+      "patterns": ["tell me something about table tennis","what do you know about table tennis"],
+      "response": ["China gains so many gold metals","Ma long ,Fan Zhendong are the best players in the world","playing table tennis can strengthen our body"]
+    },
+    {
+      "tag": "math",
+      "patterns": ["tell me something about math","math"],
+      "response": ["Euler is one of the most famous math scientists in history","e^(pi*i)+1=0","math is usually very difficult"]
+    },
+    {
+      "tag": "genshin impact",
+      "patterns": ["do you play genshin impact","I like play genshin impact ,what about you"],
+      "response": ["WOC O!","you play genshin ,so you are chinese","OP first law!!!"]
+    },
+    {
+      "tag": "history",
+      "patterns": ["tell me something about math","math"],
+      "response": ["Euler is one of the most famous math scientists in history","e^(pi*i)+1=0","math is usually very difficult"]
     }
+
+
+
+
 
   ]
 }
