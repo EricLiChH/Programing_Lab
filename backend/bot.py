@@ -23,6 +23,7 @@ def opti_sentence(sentence):
     return sentence_words
 
 def store_words(sentence):
+    # check if in the words list
     sentence_words = opti_sentence(sentence)
     container = [0]*len(words)
     for word_s in sentence_words:
@@ -60,12 +61,20 @@ def test_bot():
     sock = socket.socket()
     sock.bind(("", port))
     sock.listen(5)
+    calc=False
     while True:
+        calc=False
         con, address = sock.accept()
         data = con.recvfrom(1024)
         message = str(data[0], 'utf-8')
-        ints = predict(message)
-        res = getresponse(ints,intends)
+        for each in message:
+            if each=='+' or each =='-' or each=='*' or each =='/':
+                res=str(eval(message))
+                calc=True
+                break
+        if calc==False:
+            ints = predict(message)
+            res = getresponse(ints,intends)
         con.sendall(bytes(res, 'utf-8'))
         con.close()
 
