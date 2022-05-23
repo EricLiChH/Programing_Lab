@@ -28,5 +28,4 @@ function startRequest(message, ctx) {
 // 监听端口、启动程序
 app.listen(3000, err => {
     if (err) throw err;
-    console.log('服务已启动');
 })

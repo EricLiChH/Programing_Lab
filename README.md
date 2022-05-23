@@ -3,8 +3,11 @@
 ## 运行方法
 
 ### Linux
+#### 启动
+`start.sh start`
 
-直接运行 `start.sh`
+#### 停止
+ `start.sh stop`
 
 ### Windows
 
