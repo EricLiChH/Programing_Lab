@@ -4,6 +4,7 @@ import re
 import pickle
 import socket
 import numpy as np
+import requests as req
 import nltk
 from nltk.stem import WordNetLemmatizer
 
@@ -62,7 +63,10 @@ def test_bot():
     sock = socket.socket()
     sock.bind(("", port))
     sock.listen(5)
-    calc=False
+
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36'
+    headers={'User-Agent':user_agent}
+
     while True:
         calc=False
         con, address = sock.accept()
@@ -74,6 +78,14 @@ def test_bot():
                 res= message + '=' + str(eval(message))
             except:
                 res = 'In this age, still doing traditonal math?'
+        elif message.split()[0] == "百科":
+            r = req.get('https://baike.baidu.com/item/' + message.split()[1], headers=headers)
+            try:
+                r.encoding = 'utf-8'
+                regex = re.compile('<div class="lemma-summary" label-module="lemmaSummary">(\s*)<div class="para" label-module="para">([\s\S]*?)</div>(\s*)</div>')
+                res = re.findall(regex, r.text)[0][1]
+            except:
+                res = '好难啊我有点看不懂'
         else:
             ints = predict(message)
             res = getresponse(ints,intends)
