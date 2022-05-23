@@ -1,5 +1,6 @@
 import random
 import json
+import re
 import pickle
 import socket
 import numpy as np
@@ -67,14 +68,16 @@ def test_bot():
         con, address = sock.accept()
         data = con.recvfrom(1024)
         message = str(data[0], 'utf-8')
-        for each in message:
-            if each=='+' or each =='-' or each=='*' or each =='/':
-                res=str(eval(message))
-                calc=True
-                break
-        if calc==False:
+
+        if re.search('^[0-9+\-][0-9+\-*/\.]*', message):
+            try:
+                res= message + '=' + str(eval(message))
+            except:
+                res = 'In this age, still doing traditonal math?'
+        else:
             ints = predict(message)
             res = getresponse(ints,intends)
+        
         con.sendall(bytes(res, 'utf-8'))
         con.close()
 
