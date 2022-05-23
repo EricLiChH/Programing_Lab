@@ -40,10 +40,10 @@ function addMsg(type, msg) {
     // 1机器人/2自己
     if (type == 1) {
         li.classList.add('computer-say');
-        li.innerHTML = `<span><img src="kang.jpg"  style="width:33px; height:33px; border-radius:110%; overflow:hidden;"></span><span class="computer say">${msg}</span>`;
-    } else {
+        li.innerHTML = `<img src="assets/kang.jpg"  style="width:33px; height:33px; border-radius:110%; overflow:hidden;"><span class="computer say">${msg}</span>`;
+    } else{
         li.classList.add('my-say');
-        li.innerHTML = `<span class="computer say">${msg}</span><span ><img src="sun.jpg" alt="我"  style="width:33px; height:33px; border-radius:110%; overflow:hidden;"></span>`;
+        li.innerHTML = `<span class="computer say">${msg}</span><img src="assets/sun.jpg" alt="我"  style="width:33px; height:33px; border-radius:110%; overflow:hidden;"></span>`;
         pl.value = '';
     }
     document.getElementById('view').appendChild(li);

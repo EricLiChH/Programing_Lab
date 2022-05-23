@@ -73,11 +73,13 @@ def test_bot():
         data = con.recvfrom(1024)
         message = str(data[0], 'utf-8')
 
+        # 计算器
         if re.search('^[0-9+\-][0-9+\-*/\.]*', message):
             try:
                 res= message + '=' + str(eval(message))
             except:
                 res = 'In this age, still doing traditonal math?'
+        # 百科
         elif message.split()[0] == "百科":
             r = req.get('https://baike.baidu.com/item/' + message.split()[1], headers=headers)
             try:
@@ -86,6 +88,7 @@ def test_bot():
                 res = re.findall(regex, r.text)[0][1]
             except:
                 res = '好难啊我有点看不懂'
+        # 普通对话
         else:
             ints = predict(message)
             res = getresponse(ints,intends)
