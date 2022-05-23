@@ -20,7 +20,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #eee;
-    width: 320px;
+    width: 850px;
     height: 564px;
     box-sizing: border-box;
 }
@@ -105,12 +105,12 @@ li {
 .say {
     display: inline-block;
     background-color: #fff;
-    font-size: 12px;
+    font-size: 14px;
     padding: 6px 4px;
     border-radius: 4px;
     margin-top: 1px;
     vertical-align: top;
-    max-width: 220px;
+    max-width: 400px;
 }
 
 .computer-say .sayman {
